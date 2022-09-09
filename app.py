@@ -6,7 +6,13 @@ from st_aggrid import GridOptionsBuilder, AgGrid
 import plotly.express as px
 import altair as alt
 import seaborn as sns
+from PIL import Image
 
+st.set_page_config(page_title='Whatsapp chat Analyser',layout="wide")
+image1 = Image.open('images/ham.jpg')
+image2 = Image.open('images/more.jpg')
+image3 = Image.open('images/export chat.jpg')
+image4 = Image.open('images/without media.jpg')
 
 def table(data):
     gb = GridOptionsBuilder.from_dataframe(data)
@@ -33,14 +39,50 @@ def header(url):
     st.markdown(
         f'<h3 style="color:#faf3f2;">{url}</h3>',
         unsafe_allow_html=True)
+def header2(url):
+    st.markdown(
+        f'<h5 style="color:#faf3f2;">{url}</h5>',
+        unsafe_allow_html=True)
+
 def title(url):
     st.markdown(
         f'<h1 style="color:#eb4034;">{url}</h1>',
         unsafe_allow_html=True)
 
+def title2(url):
+    st.markdown(
+        f'<h2 style="color:#eb4034;">{url}</h2>',
+        unsafe_allow_html=True)
+
 with st.sidebar:
     user_menu=option_menu(
-    'Whatsapp Chat Analyzer',['Upload'],menu_icon="cast",icons=['cloud-arrow-up'])
+    'Whatsapp Analyzer',['Home','Upload'],menu_icon="cast",icons=['house','cloud-arrow-up'])
+
+
+if user_menu=='Home':
+    title2('Lets analyse your whatsapp chats')
+    st.write('Have you ever wondered which people text most in your whatsapp group or what words do you say the most ?  We can help you feed that curiosity')
+
+    st.write('Whatsapp Analyzer generates insights about your chats within seconds in the form of graphs and stats, it can be used for group chats as well as private one-one chat')
+
+    title2('How to use the app ?')
+
+    st.write('(Please Make sure that your phone is on 24 hour format)')
+    st.write('Step 1: Open your whatsapp Chat > Click the Dropdown / Kebab menu (the 3 dots)')
+    st.image(image1,width=300)
+
+    st.write('Step 2: Then click on "More"')
+    st.image(image2, width=300)
+
+
+    st.write('Step 3:  Now select the "Export chat" option')
+    st.image(image3, width=300)
+
+    st.write('Step 4: Finally click on "Without Media"')
+    st.image(image4, width=300)
+
+    header2('Now click on the upload button in the menu and upload your chat!!')
+
 
 if user_menu=='Upload':
     uploaded_file = st.sidebar.file_uploader("Choose A File")
